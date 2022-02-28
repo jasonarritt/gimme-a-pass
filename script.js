@@ -2,6 +2,19 @@
 var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 
+writePassword();
+
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+
 
 //Functions to collect inputs from user
 //Ask for desired number of characters
@@ -89,26 +102,13 @@ function generatePassword() {
   console.log("The number of available characters is: " + numAvailableChars);
 
   //Take inputs and generate password
-  for (i = 0; i < numChars; i++) {
+  for (i = 0; password.length < numChars; i++) {
     password += availableChars.charAt(Math.floor(Math.random() * numAvailableChars));
   }
   
   //Console password
-  console.log(password);
+  console.log("The generated password is: " + password);
 
   //Return password for writePassword()
   return password;
 }
-
-writePassword();
-
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);

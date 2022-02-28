@@ -1,21 +1,19 @@
 // Assignment Code
-
 var generateBtn = document.querySelector("#generate");
-
 // Write password to the #password input
 
 
-//Collect input from user
-//Collect desired number of characters
+//Functions to collect inputs from user
+//Ask for desired number of characters
 function getNumChars() {
   numChars = window.prompt("How many characters would you like your password to be? (8-128)");
-  if (numChars >= 8 && numChars <= 128) {
+  if ((numChars != NaN) && (numChars >= 8 && numChars <= 128)) {
     console.log("That is a valid number of characters.");
   } else {
     window.alert("Please enter a value of no less than 8 and no more than 128 characters.");
     getNumChars();
   };
-  console.log("You have chosen " + numChars + " characters for your password.");
+
   return numChars;
 };
 
@@ -61,11 +59,21 @@ function generatePassword() {
   var numAvailableChars = 0;
 
   //Collect inputs
-  const numChars = getNumChars();
-  const uppercaseConfirm = wantUppercase();
-  const lowercaseConfirm = wantLowercase();
-  const numConfirm = wantNums();
-  const symConfirm = wantSymbols();
+  var numChars = getNumChars();
+  console.log("You have chosen " + numChars + " characters for your password.");
+
+  var uppercaseConfirm;
+  var lowercaseConfirm;
+  var numConfirm;
+  var symConfirm;
+
+  while (!uppercaseConfirm && !lowercaseConfirm && !numConfirm && !symConfirm) {
+    window.alert("Please select at least one character option to generate a password!");
+    uppercaseConfirm = wantUppercase();
+    lowercaseConfirm = wantUppercase();
+    numConfirm = wantNums();
+    symConfirm = wantSymbols();
+  }
 
   //Test return of inputs
   console.log("The values you have set are: " + numChars, uppercaseConfirm, lowercaseConfirm, numConfirm, symConfirm);
@@ -84,10 +92,11 @@ function generatePassword() {
   for (i = 0; i < numChars; i++) {
     password += availableChars.charAt(Math.floor(Math.random() * numAvailableChars));
   }
- 
+  
+  //Console password
   console.log(password);
 
-  //Return password to user
+  //Return password for writePassword()
   return password;
 }
 

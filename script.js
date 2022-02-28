@@ -1,26 +1,10 @@
 // Assignment Code
 
-
-
-
-// function getLetters() {
-//   //Ask if they would like letters or not
-//   var letterConfirm = window.confirm("Would you like the password to contain letters?");
-//   //If they would like letters confirm uppercase/lowercase
-//   if (letterConfirm) {
-//     //Check about uppercase letters
-//     var uppercaseConfirm = window.confirm("Would you like to include uppercase letters in your password?");
-//     //Check about lowercase letters
-//     var lowercaseConfirm = window.confirm("Would you like to include lowercase letters in your password?");
-//   }
-// }
-
-
-
-
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
+
+
 //Collect input from user
 //Collect desired number of characters
 function getNumChars() {
@@ -65,6 +49,17 @@ function wantSymbols() {
 
 //Generate password
 function generatePassword() {
+  //Declare variables
+  var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+  var numbers = "0123456789";
+  var symbols = "!@#$%^&*_+"
+
+  var password = "";
+
+  var availableChars = "";
+  var numAvailableChars = 0;
+
   //Collect inputs
   const numChars = getNumChars();
   const uppercaseConfirm = wantUppercase();
@@ -72,15 +67,31 @@ function generatePassword() {
   const numConfirm = wantNums();
   const symConfirm = wantSymbols();
 
-
   //Test return of inputs
-  console.log(numChars, uppercaseConfirm, lowercaseConfirm, numConfirm, symConfirm);
+  console.log("The values you have set are: " + numChars, uppercaseConfirm, lowercaseConfirm, numConfirm, symConfirm);
 
+  //Determine set of available characters and sum
+  if (uppercaseConfirm) availableChars += uppercaseLetters , numAvailableChars += 26;
+  if (lowercaseConfirm) availableChars += lowercaseLetters , numAvailableChars += 26;
+  if (numConfirm) availableChars += numbers , numAvailableChars += 10;
+  if (symConfirm) availableChars += symbols , numAvailableChars += 12;
+
+  //Inform of available characters and sum
+  console.log("The available characters chosen are: " + availableChars);
+  console.log("The number of available characters is: " + numAvailableChars);
 
   //Take inputs and generate password
+  for (i = 0; i < numChars; i++) {
+    password += availableChars.charAt(Math.floor(Math.random() * numAvailableChars));
+  }
+ 
+  console.log(password);
+
+  //Return password to user
+  return password;
 }
 
-generatePassword();
+writePassword();
 
 function writePassword() {
   var password = generatePassword();

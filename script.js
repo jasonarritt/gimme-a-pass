@@ -26,7 +26,6 @@ function getNumChars() {
     window.alert("Please enter a value of no less than 8 and no more than 128 characters.");
     getNumChars();
   };
-
   return numChars;
 };
 
@@ -83,7 +82,7 @@ function generatePassword() {
   while (!uppercaseConfirm && !lowercaseConfirm && !numConfirm && !symConfirm) {
     window.alert("Please select at least one character option to generate a password!");
     uppercaseConfirm = wantUppercase();
-    lowercaseConfirm = wantUppercase();
+    lowercaseConfirm = wantLowercase();
     numConfirm = wantNums();
     symConfirm = wantSymbols();
   }
